@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://data/menu/system.gd" type="Script" id=1]
+[ext_resource path="res://data/menu/drawer.gd" type="Script" id=2]
+[ext_resource path="res://graphs/menu/load_bar.png" type="Texture" id=3]
+[ext_resource path="res://graphs/menu/bar.png" type="Texture" id=4]
+
+[node name="system" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="drawer" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="leftH" type="Sprite" parent="."]
+modulate = Color( 0, 1, 0.27451, 1 )
+position = Vector2( 45, 0 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="bar" type="Sprite" parent="leftH"]
+position = Vector2( 1, 1 )
+scale = Vector2( 154, 1 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="leftM" type="Sprite" parent="."]
+modulate = Color( 0, 1, 0.784314, 1 )
+position = Vector2( 45, 19 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="bar" type="Sprite" parent="leftM"]
+position = Vector2( 1, 1 )
+scale = Vector2( 154, 1 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="rightH" type="Sprite" parent="."]
+modulate = Color( 0, 1, 0.27451, 1 )
+position = Vector2( 435, 0 )
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="bar" type="Sprite" parent="rightH"]
+position = Vector2( 1, 1 )
+scale = Vector2( 154, 1 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="rightM" type="Sprite" parent="."]
+modulate = Color( 0, 1, 0.784314, 1 )
+position = Vector2( 435, 19 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="bar" type="Sprite" parent="rightM"]
+position = Vector2( 1, 1 )
+scale = Vector2( 154, 1 )
+texture = ExtResource( 4 )
+centered = false

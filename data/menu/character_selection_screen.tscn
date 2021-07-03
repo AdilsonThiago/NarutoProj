@@ -1,0 +1,121 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://graphs/menu/mainmenu.png" type="Texture" id=1]
+[ext_resource path="res://data/menu/character_selection_screen.gd" type="Script" id=2]
+[ext_resource path="res://graphs/menu/curs.png" type="Texture" id=3]
+[ext_resource path="res://graphs/menu/load_bar.png" type="Texture" id=4]
+[ext_resource path="res://graphs/menu/bar.png" type="Texture" id=5]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[node name="character_selection_screen" type="Sprite"]
+texture = ExtResource( 1 )
+centered = false
+hframes = 3
+frame = 2
+script = ExtResource( 2 )
+
+[node name="cursor" type="Sprite" parent="."]
+material = SubResource( 1 )
+texture = ExtResource( 3 )
+
+[node name="info" type="Label" parent="."]
+margin_left = 118.0
+margin_top = 81.0
+margin_right = 434.0
+margin_bottom = 214.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Nome:
+Vitalidade:
+Chackra:
+Ataque:
+Chackra ataque:
+Velocidade:
+Vitórias:
+Derrotas:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="nv" type="Label" parent="."]
+margin_left = 13.0
+margin_top = 48.0
+margin_right = 467.0
+margin_bottom = 65.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "Nível : "
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="chbar" type="Sprite" parent="."]
+position = Vector2( 252, 98 )
+scale = Vector2( 1, 0.7 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="bar" type="Sprite" parent="chbar"]
+position = Vector2( 1, 2 )
+scale = Vector2( 154, 1 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="chbar2" type="Sprite" parent="."]
+position = Vector2( 252, 115 )
+scale = Vector2( 1, 0.7 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="bar" type="Sprite" parent="chbar2"]
+position = Vector2( 1, 2 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="chbar3" type="Sprite" parent="."]
+position = Vector2( 252, 132 )
+scale = Vector2( 1, 0.7 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="bar" type="Sprite" parent="chbar3"]
+position = Vector2( 1, 2 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="chbar4" type="Sprite" parent="."]
+position = Vector2( 252, 149 )
+scale = Vector2( 1, 0.7 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="bar" type="Sprite" parent="chbar4"]
+position = Vector2( 1, 2 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="chbar5" type="Sprite" parent="."]
+position = Vector2( 252, 165 )
+scale = Vector2( 1, 0.7 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="bar" type="Sprite" parent="chbar5"]
+position = Vector2( 1, 2 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="ipadr" type="Label" parent="."]
+margin_left = 12.0
+margin_top = 15.0
+margin_right = 219.0
+margin_bottom = 41.0
+rect_scale = Vector2( 1.25, 1.25 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

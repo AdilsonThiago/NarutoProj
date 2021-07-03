@@ -1,0 +1,1045 @@
+[gd_scene load_steps=47 format=2]
+
+[ext_resource path="res://data/characters/naruto.gd" type="Script" id=1]
+[ext_resource path="res://graphs/game/characters/naruto/idle.png" type="Texture" id=2]
+[ext_resource path="res://graphs/game/characters/naruto/walk.png" type="Texture" id=3]
+[ext_resource path="res://graphs/game/characters/naruto/run.png" type="Texture" id=4]
+[ext_resource path="res://graphs/game/characters/naruto/jump_up.png" type="Texture" id=5]
+[ext_resource path="res://graphs/game/characters/naruto/jump_down.png" type="Texture" id=6]
+[ext_resource path="res://graphs/game/characters/naruto/fight1.png" type="Texture" id=7]
+[ext_resource path="res://graphs/game/characters/naruto/fight2.png" type="Texture" id=8]
+[ext_resource path="res://graphs/game/characters/naruto/fight3.png" type="Texture" id=9]
+[ext_resource path="res://graphs/game/characters/naruto/kick.png" type="Texture" id=10]
+[ext_resource path="res://graphs/game/characters/naruto/kick3.png" type="Texture" id=11]
+[ext_resource path="res://graphs/game/characters/naruto/fight4.png" type="Texture" id=12]
+[ext_resource path="res://graphs/game/characters/naruto/defense.png" type="Texture" id=13]
+[ext_resource path="res://graphs/game/characters/naruto/teleport.png" type="Texture" id=14]
+[ext_resource path="res://graphs/game/characters/naruto/takedown1.png" type="Texture" id=15]
+[ext_resource path="res://graphs/game/characters/naruto/takedown2.png" type="Texture" id=16]
+[ext_resource path="res://graphs/game/characters/naruto/takedown3.png" type="Texture" id=17]
+[ext_resource path="res://graphs/game/characters/naruto/takedown4.png" type="Texture" id=18]
+[ext_resource path="res://graphs/game/characters/naruto/special1.png" type="Texture" id=19]
+[ext_resource path="res://graphs/game/characters/naruto/chack.png" type="Texture" id=20]
+[ext_resource path="res://graphs/game/characters/naruto/retreat.png" type="Texture" id=21]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.75
+bounce = -2.0
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 11.0
+height = 27.0
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 15, 15 )
+
+[sub_resource type="Animation" id=4]
+length = 0.04
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/break:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "break_smoke_effect"
+} ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "chack"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/chack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "mana_effect"
+} ]
+}
+
+[sub_resource type="Animation" id=6]
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/defense:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/fight1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 0, 2, 3, 4 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ 1.0, Vector2( 1, 0 ) ],
+"method": "display_damage"
+}, {
+"args": [  ],
+"method": "combo"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("player/damagearea:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 32.9619, -5.40359 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/fight2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ 1.0, Vector2( 1, 0 ) ],
+"method": "display_damage"
+}, {
+"args": [  ],
+"method": "combo"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("player/damagearea:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 29.1794, 1.62108 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/fight3:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ 1.85, Vector2( 6, -3 ) ],
+"method": "display_damage"
+}, {
+"args": [  ],
+"method": "combo"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("player/damagearea:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 31.3408, -3.24216 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/fight4:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("player/fight4:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, -12 ), Vector2( 0, -13 ), Vector2( 0, -7 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("player/fight4:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -50.0, -13.0, 0.0 ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ 1.5, Vector2( 3.7, -7.5 ) ],
+"method": "display_damage"
+}, {
+"args": [  ],
+"method": "combo"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("player/damagearea:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 28, -14 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/fight5:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("player/fight5:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("player/damagearea:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 129.686, -32.9619 ) ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.3, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [ 1.5, Vector2( 4, 12 ) ],
+"method": "display_damage"
+}, {
+"args": [  ],
+"method": "combo"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("player/fight5:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 137, -55.657 ), Vector2( 0, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("player/teleport:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("player/teleport:position")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Vector2( 136, -61 ), Vector2( 0, 0 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("player/teleport:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 2, 3, 4, 5, 1, 2, 4 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("player/fight5:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("player/fight4:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=12]
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/idle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="Animation" id=13]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/jump_down:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="Animation" id=14]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/jump_up:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[sub_resource type="Animation" id=15]
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/knok1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=16]
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/knok2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=17]
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/knok3:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=18]
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/knok4:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=19]
+resource_name = "retreat"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/retreat:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "enable_move"
+} ]
+}
+
+[sub_resource type="Animation" id=20]
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/run:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="Animation" id=21]
+length = 2.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/special1:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 12, 11, 9, 18 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 2.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"values": [ {
+"args": [ Vector2( 220, 0 ) ],
+"method": "velocity"
+}, {
+"args": [ Vector2( 220, 0 ) ],
+"method": "velocity"
+}, {
+"args": [ Vector2( 220, 0 ) ],
+"method": "velocity"
+}, {
+"args": [ Vector2( 220, 0 ) ],
+"method": "velocity"
+}, {
+"args": [ Vector2( 220, 0 ) ],
+"method": "velocity"
+}, {
+"args": [ Vector2( 220, 0 ) ],
+"method": "velocity"
+}, {
+"args": [ Vector2( 220, 0 ) ],
+"method": "velocity"
+}, {
+"args": [ Vector2( 220, 0 ) ],
+"method": "velocity"
+}, {
+"args": [  ],
+"method": "enable_move"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"values": [ {
+"args": [ 0.5, Vector2( 0.5, -0.5 ) ],
+"method": "display_damage"
+}, {
+"args": [ 0.5, Vector2( 0.5, -0.5 ) ],
+"method": "display_damage"
+}, {
+"args": [ 0.5, Vector2( 0.5, -0.5 ) ],
+"method": "display_damage"
+}, {
+"args": [ 0.5, Vector2( 0.5, -0.5 ) ],
+"method": "display_damage"
+}, {
+"args": [ 0.5, Vector2( 0.5, -0.5 ) ],
+"method": "display_damage"
+}, {
+"args": [ 0.5, Vector2( 0.5, -0.5 ) ],
+"method": "display_damage"
+}, {
+"args": [ 0.5, Vector2( 0.5, -0.5 ) ],
+"method": "display_damage"
+}, {
+"args": [ 1.35, Vector2( 5, -3 ) ],
+"method": "display_damage"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("player/damagearea:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1, 1.2, 1.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 37.596, -3.02031 ), Vector2( 48.056, -4.60916 ), Vector2( 57.8401, -9.54299 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("player/damagearea:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1, 1.7, 2.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ), Vector2( 2.2, 2.2 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=22]
+length = 1.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/special1fast:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 4, 5, 7, 9, 10, 11, 10, 11, 9 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "enable_move"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.4, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"values": [ {
+"args": [ 0.5, Vector2( 0.5, -0.5 ) ],
+"method": "display_damage"
+}, {
+"args": [ 0.5, Vector2( 0.5, -0.5 ) ],
+"method": "display_damage"
+}, {
+"args": [ 0.5, Vector2( 0.5, -0.5 ) ],
+"method": "display_damage"
+}, {
+"args": [ 0.5, Vector2( 0.5, -0.5 ) ],
+"method": "display_damage"
+}, {
+"args": [ 0.5, Vector2( 5, -3 ) ],
+"method": "display_damage"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("player/damagearea:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 37.596, -3.02031 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("player/damagearea:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ) ]
+}
+
+[sub_resource type="Animation" id=23]
+length = 0.77
+loop = true
+step = 0.07
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/teleport:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.07, 0.14, 0.21, 0.28, 0.35, 0.42, 0.49, 0.56, 0.63 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 4, 5, 1, 2, 3, 4, 5 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.35, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "teleport"
+}, {
+"args": [  ],
+"method": "enable_move"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("player/defense:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.35, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=24]
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("player/walk:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+
+[sub_resource type="CircleShape2D" id=25]
+
+[node name="Naruto" type="RigidBody2D" groups=[
+"character",
+]]
+mode = 2
+physics_material_override = SubResource( 1 )
+gravity_scale = 10.0
+contacts_reported = 4
+contact_monitor = true
+linear_damp = 1.0
+script = ExtResource( 1 )
+
+[node name="body_shape" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="bodshapeh" type="Area2D" parent="."]
+gravity_vec = Vector2( 0, 0 )
+gravity = 0.0
+linear_damp = 0.0
+angular_damp = 0.0
+monitorable = false
+
+[node name="shape" type="CollisionShape2D" parent="bodshapeh"]
+shape = SubResource( 3 )
+
+[node name="telparea" type="Area2D" parent="."]
+gravity_vec = Vector2( 0, 0 )
+gravity = 0.0
+linear_damp = 0.0
+angular_damp = 0.0
+monitorable = false
+
+[node name="shape" type="CollisionShape2D" parent="telparea"]
+shape = SubResource( 3 )
+
+[node name="animcontrol" type="AnimationPlayer" parent="."]
+anims/break = SubResource( 4 )
+anims/chack = SubResource( 5 )
+anims/defense = SubResource( 6 )
+anims/fight1 = SubResource( 7 )
+anims/fight2 = SubResource( 8 )
+anims/fight3 = SubResource( 9 )
+anims/fight4 = SubResource( 10 )
+anims/fight5 = SubResource( 11 )
+anims/idle = SubResource( 12 )
+anims/jump_down = SubResource( 13 )
+anims/jump_up = SubResource( 14 )
+anims/knok1 = SubResource( 15 )
+anims/knok2 = SubResource( 16 )
+anims/knok3 = SubResource( 17 )
+anims/knok4 = SubResource( 18 )
+anims/retreat = SubResource( 19 )
+anims/run = SubResource( 20 )
+anims/special1 = SubResource( 21 )
+anims/special1fast = SubResource( 22 )
+anims/teleport = SubResource( 23 )
+anims/walk = SubResource( 24 )
+
+[node name="player" type="Node2D" parent="."]
+
+[node name="idle" type="Sprite" parent="player"]
+texture = ExtResource( 2 )
+hframes = 6
+frame = 1
+
+[node name="chack" type="Sprite" parent="player"]
+visible = false
+texture = ExtResource( 20 )
+
+[node name="walk" type="Sprite" parent="player"]
+visible = false
+texture = ExtResource( 3 )
+hframes = 6
+
+[node name="break" type="Sprite" parent="player"]
+visible = false
+rotation = -0.191986
+texture = ExtResource( 3 )
+hframes = 6
+frame = 3
+
+[node name="run" type="Sprite" parent="player"]
+visible = false
+texture = ExtResource( 4 )
+hframes = 6
+
+[node name="jump_up" type="Sprite" parent="player"]
+visible = false
+texture = ExtResource( 5 )
+hframes = 2
+
+[node name="jump_down" type="Sprite" parent="player"]
+visible = false
+texture = ExtResource( 6 )
+hframes = 2
+frame = 1
+
+[node name="retreat" type="Sprite" parent="player"]
+visible = false
+texture = ExtResource( 21 )
+
+[node name="fight1" type="Sprite" parent="player"]
+visible = false
+texture = ExtResource( 7 )
+offset = Vector2( 5, 0 )
+hframes = 5
+frame = 4
+
+[node name="fight2" type="Sprite" parent="player"]
+visible = false
+texture = ExtResource( 8 )
+offset = Vector2( 7, 0 )
+hframes = 4
+
+[node name="fight3" type="Sprite" parent="player"]
+visible = false
+texture = ExtResource( 9 )
+hframes = 4
+
+[node name="fight4" type="Sprite" parent="player"]
+visible = false
+texture = ExtResource( 10 )
+offset = Vector2( 9, 0 )
+hframes = 4
+
+[node name="fight5" type="Sprite" parent="player"]
+visible = false
+position = Vector2( 137, -55.657 )
+texture = ExtResource( 11 )
+flip_h = true
+hframes = 5
+
+[node name="fight6" type="Sprite" parent="player"]
+visible = false
+texture = ExtResource( 12 )
+offset = Vector2( 0, -10 )
+hframes = 2
+
+[node name="defense" type="Sprite" parent="player"]
+visible = false
+texture = ExtResource( 13 )
+
+[node name="teleport" type="Sprite" parent="player"]
+visible = false
+texture = ExtResource( 14 )
+offset = Vector2( 3, 0 )
+hframes = 6
+frame = 1
+
+[node name="knok1" type="Sprite" parent="player"]
+visible = false
+texture = ExtResource( 15 )
+
+[node name="knok2" type="Sprite" parent="player"]
+visible = false
+texture = ExtResource( 16 )
+offset = Vector2( 6, 0 )
+
+[node name="knok3" type="Sprite" parent="player"]
+visible = false
+texture = ExtResource( 17 )
+offset = Vector2( 1, 11 )
+
+[node name="knok4" type="Sprite" parent="player"]
+visible = false
+texture = ExtResource( 18 )
+offset = Vector2( 0, 6 )
+
+[node name="special1" type="Sprite" parent="player"]
+visible = false
+texture = ExtResource( 19 )
+offset = Vector2( 7, -27 )
+hframes = 20
+
+[node name="special1fast" type="Sprite" parent="player"]
+visible = false
+texture = ExtResource( 19 )
+offset = Vector2( 7, -27 )
+hframes = 20
+frame = 9
+
+[node name="damagearea" type="Area2D" parent="player"]
+visible = false
+position = Vector2( 33, -5.404 )
+monitorable = false
+
+[node name="damage_shape" type="CollisionShape2D" parent="player/damagearea"]
+shape = SubResource( 25 )
+
+[node name="damagearea2" type="Area2D" parent="player"]
+visible = false
+position = Vector2( -33, -5.404 )
+monitorable = false
+
+[node name="damage_shape" type="CollisionShape2D" parent="player/damagearea2"]
+shape = SubResource( 25 )
+[connection signal="body_entered" from="." to="." method="_on_Naruto_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_Naruto_body_exited"]
+[connection signal="body_entered" from="bodshapeh" to="." method="_on_bodshapeh_body_entered"]
+[connection signal="body_entered" from="telparea" to="." method="_on_bodshapeh_body_entered"]

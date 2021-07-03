@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://graphs/game/backgrounds/terrain1.png" type="Texture" id=1]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.45
+bounce = -0.8
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 55, 15 )
+
+[node name="body" type="RigidBody2D" groups=[
+"solid",
+]]
+z_index = -1
+mode = 3
+physics_material_override = SubResource( 1 )
+gravity_scale = 0.0
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 3
+frame = 1
+
+[node name="shape" type="CollisionShape2D" parent="."]
+position = Vector2( -5, 8 )
+shape = SubResource( 2 )
+
